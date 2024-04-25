@@ -1,0 +1,7 @@
+C:\Workspace\Projektarbeit\backend\obj\Debug\net8.0\backend.csproj.AssemblyReference.cache
+C:\Workspace\Projektarbeit\backend\obj\Debug\net8.0\backend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Workspace\Projektarbeit\backend\obj\Debug\net8.0\backend.AssemblyInfoInputs.cache
+C:\Workspace\Projektarbeit\backend\obj\Debug\net8.0\backend.AssemblyInfo.cs
+C:\Workspace\Projektarbeit\backend\obj\Debug\net8.0\backend.csproj.CoreCompileInputs.cache
+C:\Workspace\Projektarbeit\backend\obj\Debug\net8.0\backend.MvcApplicationPartsAssemblyInfo.cs
+C:\Workspace\Projektarbeit\backend\obj\Debug\net8.0\backend.MvcApplicationPartsAssemblyInfo.cache

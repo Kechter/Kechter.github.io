@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Workspace\\Projektarbeit\\backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|c:\\workspace\\projektarbeit\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|c:\\workspace\\projektarbeit\\backend\\controllers\\todoitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|solutionrelative:controllers\\todoitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|c:\\workspace\\projektarbeit\\backend\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|solutionrelative:dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|c:\\workspace\\projektarbeit\\backend\\todoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|solutionrelative:todoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|c:\\workspace\\projektarbeit\\backend\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|c:\\workspace\\projektarbeit\\backend\\obj\\backend.csproj.entityframeworkcore.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|solutionrelative:obj\\backend.csproj.entityframeworkcore.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|c:\\workspace\\projektarbeit\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DDC1E321-E597-4D4B-88D5-60C0C24696CB}|backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "backend.csproj.EntityFrameworkCore.targets",
+              "DocumentMoniker": "C:\\Workspace\\Projektarbeit\\backend\\obj\\backend.csproj.EntityFrameworkCore.targets",
+              "RelativeDocumentMoniker": "obj\\backend.csproj.EntityFrameworkCore.targets",
+              "ToolTip": "C:\\Workspace\\Projektarbeit\\backend\\obj\\backend.csproj.EntityFrameworkCore.targets",
+              "RelativeToolTip": "obj\\backend.csproj.EntityFrameworkCore.targets",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2024-04-24T16:23:41.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Workspace\\Projektarbeit\\backend\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Workspace\\Projektarbeit\\backend\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-24T16:15:22.518Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TodoItemsController.cs",
+              "DocumentMoniker": "C:\\Workspace\\Projektarbeit\\backend\\Controllers\\TodoItemsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TodoItemsController.cs",
+              "ToolTip": "C:\\Workspace\\Projektarbeit\\backend\\Controllers\\TodoItemsController.cs",
+              "RelativeToolTip": "Controllers\\TodoItemsController.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwBIAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T16:11:33.822Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DbContext.cs",
+              "DocumentMoniker": "C:\\Workspace\\Projektarbeit\\backend\\DbContext.cs",
+              "RelativeDocumentMoniker": "DbContext.cs",
+              "ToolTip": "C:\\Workspace\\Projektarbeit\\backend\\DbContext.cs",
+              "RelativeToolTip": "DbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T16:10:32.635Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TodoItem.cs",
+              "DocumentMoniker": "C:\\Workspace\\Projektarbeit\\backend\\TodoItem.cs",
+              "RelativeDocumentMoniker": "TodoItem.cs",
+              "ToolTip": "C:\\Workspace\\Projektarbeit\\backend\\TodoItem.cs",
+              "RelativeToolTip": "TodoItem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T16:09:55.184Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Workspace\\Projektarbeit\\backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Workspace\\Projektarbeit\\backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T15:50:05.311Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Workspace\\Projektarbeit\\backend\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Workspace\\Projektarbeit\\backend\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-24T15:47:59.33Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
