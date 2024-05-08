@@ -13,7 +13,8 @@ export class TestComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.getData().subscribe(data => {
+      console.log("Fetched data:", data); // Add this line
       this.data = data;
     });
-  }
+  }  
 }
