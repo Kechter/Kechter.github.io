@@ -11,7 +11,7 @@ import { TestComponent } from './test/test.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule // Add HttpClientModule to imports
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
