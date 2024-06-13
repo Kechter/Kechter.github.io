@@ -1,17 +1,18 @@
-import { Component } from '@angular/core'
-import { FormBuilder } from '@angular/forms'
-import { SupabaseService } from '../supabase.service'
+import { Component } from '@angular/core';
+import { SupabaseService } from '../supabase.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class AuthComponent {
+export class LoginComponent {
   loading = false
 
   signInForm = this.formBuilder.group({
     email: '',
+    password: '',
   })
 
   constructor(
@@ -23,9 +24,9 @@ export class AuthComponent {
     try {
       this.loading = true
       const email = this.signInForm.value.email as string
-      const { error } = await this.supabase.signIn(email)
+      const password = this.signInForm.value.password as string
+      const { error } = await this.supabase.signIn(email, password)
       if (error) throw error
-      alert('Check your email for the login link!')
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message)
