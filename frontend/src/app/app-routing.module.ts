@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { TodoComponent } from './todo/todo.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { TimerComponent } from './timer/timer.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'todo', component: TodoComponent },
   { path: 'calendar' , component: CalendarComponent},
   { path: 'timer', component: TimerComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'homepage', component: HomepageComponent },
+  { path: '', redirectTo: '/homepage', pathMatch: 'full' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
