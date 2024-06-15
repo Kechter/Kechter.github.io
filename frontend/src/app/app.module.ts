@@ -11,6 +11,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { TodoComponent } from './todo/todo.component';
 import { TimerComponent } from './timer/timer.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TimerComponent } from './timer/timer.component';
     HomepageComponent,
     CalendarComponent,
     TodoComponent,
-    TimerComponent
+    TimerComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
