@@ -4,8 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 import { RegisterComponent } from './register/register.component';
-import { AccountComponent } from './account/account.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CalendarComponent } from './calendar/calendar.component';
@@ -18,7 +17,6 @@ import { HeaderComponent } from './header/header.component';
     AppComponent,
     TestComponent,
     RegisterComponent,
-    AccountComponent,
     LoginComponent,
     HomepageComponent,
     CalendarComponent,
@@ -30,6 +28,7 @@ import { HeaderComponent } from './header/header.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

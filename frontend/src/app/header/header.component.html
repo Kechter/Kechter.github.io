@@ -1,16 +1,16 @@
 <div class="header">
-    <div class="header-left">
-      <button class="settings-button">
-        <span class="material-icons">settings</span>
-      </button>
-    </div>
-    <div class="header-center">
-      <h1>{{ title }}</h1>
-    </div>
-    <div class="header-right">
-      <button class="settings-button">
-        <span class="material-icons">settings</span>
-      </button>
+  <div class="header-left">
+    <button class="settings-button">
+      <span class="material-icons">settings</span>
+    </button>
+  </div>
+  <div class="header-center">
+    <h1>{{ title }}</h1>
+  </div>
+  <div class="header-right">
+    <div>
+      <span *ngIf="user">Logged in as: {{ user.email }}</span>
+      <button class="button block" (click)="signOut()">Sign Out</button>
     </div>
   </div>
-  
+</div>

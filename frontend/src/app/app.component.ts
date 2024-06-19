@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { SupabaseService } from './supabase.service'
 
 @Component({
@@ -9,7 +9,7 @@ import { SupabaseService } from './supabase.service'
 export class AppComponent implements OnInit {
   title = 'angular-user-management'
 
-  session = this.supabase.session
+  session = this.supabase._session
 
   constructor(private readonly supabase: SupabaseService) {}
 

@@ -1,5 +1,6 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , Input, OnInit} from '@angular/core';
 import { HeaderService } from '../header.service';
+import { AuthSession } from '@supabase/supabase-js';
 
 @Component({
   selector: 'app-homepage',
@@ -8,6 +9,9 @@ import { HeaderService } from '../header.service';
 })
 export class HomepageComponent implements OnInit{
 
+  @Input()
+  session!: AuthSession
+  
   constructor(private headerService: HeaderService) {}
 
   ngOnInit() {

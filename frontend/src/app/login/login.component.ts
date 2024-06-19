@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SupabaseService } from '../supabase.service';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
 
   constructor(
     private readonly supabase: SupabaseService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   async onSubmit(): Promise<void> {
@@ -34,6 +36,7 @@ export class LoginComponent {
     } finally {
       this.signInForm.reset()
       this.loading = false
+      this.router.navigate(['/homepage'])
     }
   }
 }

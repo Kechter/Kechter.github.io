@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HeaderService } from '../header.service';
+import { SupabaseService } from '../supabase.service';
+import { AuthSession, User } from '@supabase/supabase-js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,13 +10,28 @@ import { HeaderService } from '../header.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  title: string;
+  title: string = 'Productivity App';
+  user: User | null = null; 
 
-  constructor(private headerService: HeaderService) {
-    this.title = 'Productivity App';
+  @Input() session!: AuthSession;
+
+  constructor(
+    private headerService: HeaderService, 
+    private readonly supabase: SupabaseService, 
+    private router: Router
+  ) {}
+
+  async ngOnInit() {
+    this.headerService.currentTitle.subscribe(title => this.title = title);
+    await this.loadUser();
   }
 
-  ngOnInit() {
-    this.headerService.currentTitle.subscribe(title => this.title = title);
+  async loadUser() {
+    this.user = await this.supabase.loadUser(); 
+  }
+  
+  async signOut() {
+    await this.supabase.signOut();
+    this.router.navigate(['/login']);
   }
 }
