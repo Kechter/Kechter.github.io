@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SupabaseService } from '../supabase.service'; // Adjust the path according to your project structure
+import { SupabaseService } from '../supabase.service';
 
 @Component({
   selector: 'app-timer',
@@ -7,34 +7,32 @@ import { SupabaseService } from '../supabase.service'; // Adjust the path accord
   styleUrls: ['./timer.component.css']
 })
 export class TimerComponent implements OnInit, OnDestroy {
-  timeLeft: number = 0; // Remaining time
-  duration: number = 0; // User input duration
+  timeLeft: number = 0;
+  duration: number = 0;
   private intervalId: any = null;
 
   constructor(private supabase: SupabaseService) {}
 
   ngOnInit(): void {
-    this.loadInitialTime(); // Load initial timer state if needed
+    this.loadInitialTime();
   }
 
   ngOnDestroy(): void {
-    this.clearTimer(); // Clean up the interval on component destruction
+    this.clearTimer();
   }
 
   startTimer(): void {
-    if (this.duration <= 0) return; // Do nothing if duration is not set
-    this.clearTimer(); // Ensure no existing timers are running
-
+    if (this.duration <= 0) return;
+    this.clearTimer();
     this.timeLeft = this.duration;
     this.intervalId = setInterval(() => {
       this.timeLeft--;
-
       if (this.timeLeft <= 0) {
-        this.clearTimer(); // Stop timer when time runs out
+        this.clearTimer();
         this.timeLeft = 0;
       }
-      this.saveTime(); // Save the updated time to Supabase
-    }, 1000); // Update every second
+      this.saveTime();
+    }, 1000);
   }
 
   clearTimer(): void {
@@ -45,21 +43,25 @@ export class TimerComponent implements OnInit, OnDestroy {
   }
 
   async saveTime(): Promise<void> {
-    // Save the remaining time to Supabase if required
     const user = await this.supabase.loadUser();
     if (user) {
-      await this.supabase.saveTimerData(user.id, this.timeLeft); // Implement saveTimerData in Supabase service
+      await this.supabase.saveTimerData(user.id, this.timeLeft);
     }
   }
 
   async loadInitialTime(): Promise<void> {
-    // Load initial time from Supabase if required
     const user = await this.supabase.loadUser();
     if (user) {
-      const savedTime = await this.supabase.loadTimerData(user.id); // Implement loadTimerData in Supabase service
+      const savedTime = await this.supabase.loadTimerData(user.id);
       if (savedTime !== null) {
         this.timeLeft = savedTime;
       }
     }
+  }
+
+  formatTimeLeft(): string {
+    const minutes = Math.floor(this.timeLeft / 60);
+    const seconds = this.timeLeft % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   }
 }
