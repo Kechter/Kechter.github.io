@@ -10,6 +10,8 @@ export class TimerComponent implements OnInit, OnDestroy {
   timeLeft: number = 0;
   duration: number = 0;
   private intervalId: any = null;
+  private lastSavedTime: number = 0;
+  private saveInterval: number = 60;
 
   constructor(private supabase: SupabaseService) {}
 
@@ -19,19 +21,23 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.clearTimer();
+    this.saveTime(true);
   }
 
   startTimer(): void {
     if (this.duration <= 0) return;
     this.clearTimer();
     this.timeLeft = this.duration;
+    this.lastSavedTime = this.timeLeft;
     this.intervalId = setInterval(() => {
       this.timeLeft--;
       if (this.timeLeft <= 0) {
         this.clearTimer();
         this.timeLeft = 0;
+        this.saveTime(true); 
+      } else if (this.timeLeft % this.saveInterval === 0) {
+        this.saveTime();
       }
-      this.saveTime();
     }, 1000);
   }
 
@@ -42,10 +48,13 @@ export class TimerComponent implements OnInit, OnDestroy {
     }
   }
 
-  async saveTime(): Promise<void> {
-    const user = await this.supabase.loadUser();
-    if (user) {
-      await this.supabase.saveTimerData(user.id, this.timeLeft);
+  async saveTime(force: boolean = false): Promise<void> {
+    if (force || Math.abs(this.lastSavedTime - this.timeLeft) >= this.saveInterval) {
+      const user = await this.supabase.loadUser();
+      if (user) {
+        await this.supabase.saveTimerData(user.id, this.timeLeft);
+        this.lastSavedTime = this.timeLeft; 
+      }
     }
   }
 
