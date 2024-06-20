@@ -11,6 +11,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { TodoComponent } from './todo/todo.component';
 import { TimerComponent } from './timer/timer.component';
 import { HeaderComponent } from './header/header.component';
+import { LucideAngularModule ,File, Home, Menu, UserCheck, Settings, LogIn, LogOut } from 'lucide-angular';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HeaderComponent } from './header/header.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    LucideAngularModule.pick({File,Home,Menu,UserCheck, Settings, LogIn, LogOut})
   ],
   providers: [],
   bootstrap: [AppComponent]
