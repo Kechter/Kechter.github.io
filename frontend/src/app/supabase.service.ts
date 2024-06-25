@@ -18,6 +18,7 @@ export interface Todo {
   user_id?: string;
   created_at?: Time;
   work_duration?: number;
+  due_date?: string;
 }
 
 @Injectable({

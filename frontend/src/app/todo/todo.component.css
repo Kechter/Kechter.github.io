@@ -1,0 +1,77 @@
+/* Styles for the todo input section */
+.todo-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .todo-inputs input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .todo-inputs button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Styles for the todo list and items */
+  .todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .todo-item {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .todo-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .todo-header input {
+    margin-right: 10px;
+  }
+  
+  .todo-header .todo-title {
+    flex: 1;
+  }
+  
+  .todo-header button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .todo-header .start-timer:hover,
+  .todo-header .delete-todo:hover {
+    text-decoration: underline;
+  }
+  
+  .todo-details {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .todo-details span {
+    font-size: 14px;
+    color: #666;
+  }
+  

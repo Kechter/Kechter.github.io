@@ -11,6 +11,7 @@ export class TodoComponent implements OnInit {
   todos: Todo[] = [];
   newTodoTitle: string = '';
   newTodoDuration: number = 0;
+  newTodoDueDate: string = '';
 
   constructor(
     private supabaseService: SupabaseService,
@@ -20,7 +21,7 @@ export class TodoComponent implements OnInit {
   ngOnInit() {
     this.fetchTodos();
   }
-  
+
   async fetchTodos() {
     try {
       this.todos = await this.supabaseService.getTodos();
@@ -30,21 +31,23 @@ export class TodoComponent implements OnInit {
   }
 
   async addTodo() {
-    if (this.newTodoTitle.trim() && this.newTodoDuration > 0) {
+    if (this.newTodoTitle.trim() && this.newTodoDuration > 0 && this.newTodoDueDate) {
       try {
         await this.supabaseService.addTodo({ 
           title: this.newTodoTitle, 
           work_duration: this.newTodoDuration, 
+          due_date: this.newTodoDueDate,
           is_complete: false 
         });
         this.newTodoTitle = '';
         this.newTodoDuration = 0;
+        this.newTodoDueDate = '';
         this.fetchTodos();
       } catch (error) {
         console.error('Error adding todo:', error);
       }
     } else {
-      alert('Please enter a valid todo title and duration.');
+      alert('Please enter a valid todo title, duration, and due date.');
     }
   }
 

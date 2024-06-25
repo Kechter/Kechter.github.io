@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'calendar' , component: CalendarComponent},
   { path: 'timer', component: TimerComponent},
   { path: 'homepage', component: HomepageComponent },
-  { path: '', redirectTo: '/homepage', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
