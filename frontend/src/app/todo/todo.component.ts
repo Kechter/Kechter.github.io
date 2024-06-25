@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HeaderService } from '../header.service';
-import { SupabaseAuthClient } from '@supabase/supabase-js/dist/module/lib/SupabaseAuthClient';
+import { Router } from '@angular/router';
 import { SupabaseService, Todo } from '../supabase.service';
 
 @Component({
@@ -10,11 +9,15 @@ import { SupabaseService, Todo } from '../supabase.service';
 })
 export class TodoComponent implements OnInit {
   todos: Todo[] = [];
-  newTodo: string = '';
-  constructor(private headerService: HeaderService, private supabaseService: SupabaseService) {}
+  newTodoTitle: string = '';
+  newTodoDuration: number = 0;
+
+  constructor(
+    private supabaseService: SupabaseService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.headerService.changeTitle('Todo');
     this.fetchTodos();
   }
   
@@ -27,14 +30,21 @@ export class TodoComponent implements OnInit {
   }
 
   async addTodo() {
-    if (this.newTodo.trim()) {
+    if (this.newTodoTitle.trim() && this.newTodoDuration > 0) {
       try {
-        await this.supabaseService.addTodo({ title: this.newTodo, is_complete: false });
-        this.newTodo = '';
+        await this.supabaseService.addTodo({ 
+          title: this.newTodoTitle, 
+          work_duration: this.newTodoDuration, 
+          is_complete: false 
+        });
+        this.newTodoTitle = '';
+        this.newTodoDuration = 0;
         this.fetchTodos();
       } catch (error) {
         console.error('Error adding todo:', error);
       }
+    } else {
+      alert('Please enter a valid todo title and duration.');
     }
   }
 
@@ -54,5 +64,9 @@ export class TodoComponent implements OnInit {
     } catch (error) {
       console.error('Error deleting todo:', error);
     }
+  }
+
+  startTimer(todo: Todo) {
+    this.router.navigate(['/timer'], { state: { todoId: todo.id } });
   }
 }

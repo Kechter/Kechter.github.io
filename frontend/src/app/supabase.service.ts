@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Injectable } from '@angular/core'
 import {
   AuthChangeEvent,
@@ -8,12 +9,15 @@ import {
   User,
 } from '@supabase/supabase-js'
 import { environment } from 'environment'
+import { Timestamp } from 'rxjs';
 
 export interface Todo {
   id?: string;
   title: string;
   is_complete: boolean;
   user_id?: string;
+  created_at?: Time;
+  work_duration?: number;
 }
 
 @Injectable({
@@ -83,7 +87,7 @@ export class SupabaseService {
     const { data, error } = await this.supabase
       .from('todos')
       .insert([{ ...todo, user_id: this._session?.user?.id }]);
-
+  
     if (error) throw error;
     return data;
   }

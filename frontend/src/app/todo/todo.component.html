@@ -1,17 +1,20 @@
 <div>
-    <h1>Todo List</h1>
-    <input [(ngModel)]="newTodo" placeholder="Enter new todo" />
+  <h1>Todo List</h1>
+  <div>
+    <input [(ngModel)]="newTodoTitle" placeholder="Enter new todo" />
+    <input type="number" [(ngModel)]="newTodoDuration" placeholder="Duration (seconds)" />
     <button (click)="addTodo()">Add Todo</button>
-    <ul>
-      <li *ngFor="let todo of todos">
-        <input
-          type="checkbox"
-          [checked]="todo.is_complete"
-          (change)="toggleComplete(todo)"
-        />
-        {{ todo.title }}
-        <button (click)="deleteTodo(todo.id!)">Delete</button>
-      </li>
-    </ul>
   </div>
-  
+  <ul>
+    <li *ngFor="let todo of todos">
+      <input
+        type="checkbox"
+        [checked]="todo.is_complete"
+        (change)="toggleComplete(todo)"
+      />
+      {{ todo.title }} - {{ todo.work_duration }}s
+      <button (click)="startTimer(todo)">Start Timer</button>
+      <button (click)="deleteTodo(todo.id!)">Delete</button>
+    </li>
+  </ul>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SupabaseService } from '../supabase.service';
 
 @Component({
@@ -12,8 +13,9 @@ export class TimerComponent implements OnInit, OnDestroy {
   private intervalId: any = null;
   private lastSavedTime: number = 0;
   private saveInterval: number = 60;
+  private todoId: string = '';
 
-  constructor(private supabase: SupabaseService) {}
+  constructor(private supabase: SupabaseService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.loadInitialTime();
@@ -22,6 +24,22 @@ export class TimerComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.clearTimer();
     this.saveTime(true);
+  }
+
+  async loadInitialTime(): Promise<void> {
+    this.todoId = history.state.todoId;
+    if (this.todoId) {
+      try {
+        const todos = await this.supabase.getTodos();
+        const todo = todos.find(t => t.id === this.todoId);
+        if (todo) {
+          this.timeLeft = todo.work_duration ?? 0;
+          this.duration = this.timeLeft;
+        }
+      } catch (error) {
+        console.error('Error loading initial time:', error);
+      }
+    }
   }
 
   startTimer(): void {
@@ -50,20 +68,11 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   async saveTime(force: boolean = false): Promise<void> {
     if (force || Math.abs(this.lastSavedTime - this.timeLeft) >= this.saveInterval) {
-      const user = await this.supabase.loadUser();
-      if (user) {
-        await this.supabase.saveTimerData(user.id, this.timeLeft);
+      try {
+        await this.supabase.updateTodo(this.todoId, { work_duration: this.timeLeft });
         this.lastSavedTime = this.timeLeft; 
-      }
-    }
-  }
-
-  async loadInitialTime(): Promise<void> {
-    const user = await this.supabase.loadUser();
-    if (user) {
-      const savedTime = await this.supabase.loadTimerData(user.id);
-      if (savedTime !== null) {
-        this.timeLeft = savedTime;
+      } catch (error) {
+        console.error('Error saving time:', error);
       }
     }
   }
