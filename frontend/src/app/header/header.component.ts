@@ -3,6 +3,7 @@ import { HeaderService } from '../header.service';
 import { SupabaseService } from '../supabase.service';
 import { AuthSession, User } from '@supabase/supabase-js';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private headerService: HeaderService, 
     private readonly supabase: SupabaseService, 
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   async ngOnInit() {
@@ -33,5 +35,9 @@ export class HeaderComponent implements OnInit {
   async signOut() {
     await this.supabase.signOut();
     this.router.navigate(['/login']);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
