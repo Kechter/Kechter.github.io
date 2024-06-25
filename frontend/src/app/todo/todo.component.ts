@@ -10,7 +10,9 @@ import { SupabaseService, Todo } from '../supabase.service';
 export class TodoComponent implements OnInit {
   todos: Todo[] = [];
   newTodoTitle: string = '';
-  newTodoDuration: number = 0;
+  newTodoHours: number = 0;
+  newTodoMinutes: number = 0;
+  newTodoSeconds: number = 0;
   newTodoDueDate: string = '';
 
   constructor(
@@ -30,17 +32,24 @@ export class TodoComponent implements OnInit {
     }
   }
 
+  calculateDuration(): number {
+    return (this.newTodoHours * 3600) + (this.newTodoMinutes * 60) + this.newTodoSeconds;
+  }
+
   async addTodo() {
-    if (this.newTodoTitle.trim() && this.newTodoDuration > 0 && this.newTodoDueDate) {
+    const duration = this.calculateDuration();
+    if (this.newTodoTitle.trim() && duration > 0 && this.newTodoDueDate) {
       try {
         await this.supabaseService.addTodo({ 
           title: this.newTodoTitle, 
-          work_duration: this.newTodoDuration, 
+          work_duration: duration, 
           due_date: this.newTodoDueDate,
           is_complete: false 
         });
         this.newTodoTitle = '';
-        this.newTodoDuration = 0;
+        this.newTodoHours = 0;
+        this.newTodoMinutes = 0;
+        this.newTodoSeconds = 0;
         this.newTodoDueDate = '';
         this.fetchTodos();
       } catch (error) {

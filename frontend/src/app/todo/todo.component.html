@@ -2,18 +2,26 @@
   <h1>Todo List</h1>
   <div class="todo-inputs">
     <input [(ngModel)]="newTodoTitle" placeholder="Enter new todo" />
-    <input type="number" [(ngModel)]="newTodoDuration" placeholder="Duration (seconds)" />
+    <div class="duration-inputs">
+      <label for="hours">Hours:</label>
+      <input type="number" id="hours" [(ngModel)]="newTodoHours" placeholder="Hours" min="0" />
+      <span>{{ newTodoHours }} h</span>
+
+      <label for="minutes">Minutes:</label>
+      <input type="number" id="minutes" [(ngModel)]="newTodoMinutes" placeholder="Minutes" min="0" max="59" />
+      <span>{{ newTodoMinutes }} m</span>
+
+      <label for="seconds">Seconds:</label>
+      <input type="number" id="seconds" [(ngModel)]="newTodoSeconds" placeholder="Seconds" min="0" max="59" />
+      <span>{{ newTodoSeconds }} s</span>
+    </div>
     <input type="date" [(ngModel)]="newTodoDueDate" placeholder="Due Date" />
     <button (click)="addTodo()">Add Todo</button>
   </div>
   <div class="todo-list">
     <div class="todo-item" *ngFor="let todo of todos">
       <div class="todo-header">
-        <input
-          type="checkbox"
-          [checked]="todo.is_complete"
-          (change)="toggleComplete(todo)"
-        />
+        <input type="checkbox" [checked]="todo.is_complete" (change)="toggleComplete(todo)" />
         <div class="todo-title">{{ todo.title }}</div>
         <button class="start-timer" (click)="startTimer(todo)">Start Timer</button>
         <button class="delete-todo" (click)="deleteTodo(todo.id!)">Delete</button>
