@@ -40,4 +40,8 @@ export class HeaderComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
+  goHome() {
+    this.router.navigate(['/homepage'])
+  }
 }
