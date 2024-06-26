@@ -10,7 +10,7 @@ import { SupabaseService } from '../supabase.service';
 export class TimerComponent implements OnInit, OnDestroy {
   timeLeft: number = 0;
   duration: number = 0;
-  private intervalId: any = null;
+  public intervalId: any = null;
   private lastSavedTime: number = 0;
   private saveInterval: number = 60;
   private todoId: string = '';
@@ -35,6 +35,7 @@ export class TimerComponent implements OnInit, OnDestroy {
         if (todo) {
           this.timeLeft = todo.work_duration ?? 0;
           this.duration = this.timeLeft;
+          this.startTimer()
         }
       } catch (error) {
         console.error('Error loading initial time:', error);
@@ -42,10 +43,10 @@ export class TimerComponent implements OnInit, OnDestroy {
     }
   }
 
-  startTimer(): void {
-    if (this.duration <= 0) return;
+  startTimer(resume: boolean = false): void {
+    if (!resume && this.duration <= 0) return;
     this.clearTimer();
-    this.timeLeft = this.duration;
+    if(!resume) this.timeLeft = this.duration;
     this.lastSavedTime = this.timeLeft;
     this.intervalId = setInterval(() => {
       this.timeLeft--;
@@ -59,10 +60,13 @@ export class TimerComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  clearTimer(): void {
+  clearTimer(save: boolean = false): void {
     if (this.intervalId) {
       clearInterval(this.intervalId);
       this.intervalId = null;
+    }
+    if(save) {
+      this.saveTime(true);
     }
   }
 
@@ -82,4 +86,12 @@ export class TimerComponent implements OnInit, OnDestroy {
     const seconds = this.timeLeft % 60;
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   }
+
+  toggleTimer(): void {
+    if (this.intervalId) {
+        this.clearTimer(true);
+    } else {
+        this.startTimer(true);
+    }
+}
 }
