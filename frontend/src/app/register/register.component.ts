@@ -28,7 +28,10 @@ export class RegisterComponent {
       const email = this.signInForm.value.email as string
       const password = this.signInForm.value.password as string
       const { error } = await this.supabase.signUp(email, password)
-      if (error) throw error
+      if (error) {
+        throw error
+      }
+      this.navigateToLogin()
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message)
@@ -36,7 +39,6 @@ export class RegisterComponent {
     } finally {
       this.signInForm.reset()
       this.loading = false
-      this.navigateToLogin()
     }
   }
   navigateToLogin() {
