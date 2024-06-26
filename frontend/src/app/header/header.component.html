@@ -3,9 +3,6 @@
     <button class="icon-button" (click)="goBack()">
       <span class="material-icons"><lucide-icon name="circle-arrow-left"></lucide-icon></span>
     </button>
-    <button class="icon-button">
-      <span class="material-icons"><lucide-icon name="settings"></lucide-icon></span>
-    </button>
     <button class="icon-button" (click)="goHome()">
       <span class="material-icons"><lucide-icon name="home"></lucide-icon></span>
     </button>
@@ -16,5 +13,8 @@
   <div class="header-right">
       <span class="user" *ngIf="user">Logged in as: {{ user.email }}</span>
       <button class="icon-button" (click)="signOut()"><lucide-icon name="log-out"></lucide-icon></button>
+      <!-- <button class="icon-button">
+      <span class="material-icons"><lucide-icon name="settings"></lucide-icon></span>
+      </button> -->
   </div>
 </div>

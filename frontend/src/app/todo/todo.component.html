@@ -3,17 +3,8 @@
   <div class="todo-inputs">
     <input [(ngModel)]="newTodoTitle" placeholder="Enter new todo" />
     <div class="duration-inputs">
-      <label for="hours">Hours:</label>
-      <input type="number" id="hours" [(ngModel)]="newTodoHours" placeholder="Hours" min="0" />
-      <span>{{ newTodoHours }} h</span>
-
       <label for="minutes">Minutes:</label>
       <input type="number" id="minutes" [(ngModel)]="newTodoMinutes" placeholder="Minutes" min="0" max="59" />
-      <span>{{ newTodoMinutes }} m</span>
-
-      <label for="seconds">Seconds:</label>
-      <input type="number" id="seconds" [(ngModel)]="newTodoSeconds" placeholder="Seconds" min="0" max="59" />
-      <span>{{ newTodoSeconds }} s</span>
     </div>
     <input type="date" [(ngModel)]="newTodoDueDate" placeholder="Due Date" />
     <button (click)="addTodo()">Add Todo</button>
