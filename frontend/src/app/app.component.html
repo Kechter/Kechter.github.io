@@ -1,9 +1,7 @@
-<div class="container" style="padding: 50px 0 100px 0">
-  <ng-container *ngIf="session; else auth">
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-  </ng-container>
-  <ng-template #auth>
-    <router-outlet></router-outlet>
-  </ng-template>
-</div>
+<ng-container *ngIf="session; else auth">
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+</ng-container>
+<ng-template #auth>
+  <router-outlet></router-outlet>
+</ng-template>

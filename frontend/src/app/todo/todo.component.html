@@ -1,19 +1,22 @@
 <div>
   <h1>Todo List</h1>
   <div class="todo-inputs">
-    <input [(ngModel)]="newTodoTitle" placeholder="Enter new todo" />
+    <input [(ngModel)]="newTodoTitle" placeholder="Enter todo title" />
     <div class="duration-inputs">
       <label for="minutes">Minutes:</label>
       <input type="number" id="minutes" [(ngModel)]="newTodoMinutes" placeholder="Minutes" min="0" max="59" />
     </div>
     <input type="date" [(ngModel)]="newTodoDueDate" placeholder="Due Date" />
-    <button (click)="addTodo()">Add Todo</button>
+    <button *ngIf="!editingTodo" (click)="addTodo()">Add Todo</button>
+    <button *ngIf="editingTodo" (click)="updateTodo()">Save</button>
+    <button *ngIf="editingTodo" (click)="cancelEdit()">Cancel</button>
   </div>
   <div class="todo-list">
     <div class="todo-item" *ngFor="let todo of todos">
       <div class="todo-header">
         <input type="checkbox" [checked]="todo.is_complete" (change)="toggleComplete(todo)" />
         <div class="todo-title">{{ todo.title }}</div>
+        <button class="edit-todo" (click)="startEdit(todo)">Edit</button>
         <button class="start-timer" (click)="startTimer(todo)">Start Timer</button>
         <button class="delete-todo" (click)="deleteTodo(todo.id!)">Delete</button>
       </div>
