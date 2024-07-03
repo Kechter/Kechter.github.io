@@ -59,7 +59,9 @@ export class CalendarComponent implements OnInit {
       date: todo.due_date,
       extendedProps: {
         work_duration: todo.work_duration,
-        is_complete: todo.is_complete
+        is_complete: todo.is_complete,
+        id: todo.id,
+        due_date: todo.due_date
       }
     }));
   }
