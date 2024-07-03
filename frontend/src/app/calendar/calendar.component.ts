@@ -39,7 +39,8 @@ export class CalendarComponent implements OnInit {
         right: 'timeGridDay,timeGridWeek,dayGridMonth'
       },
       dateClick: (arg) => this.handleDateClick(arg),
-      events: []
+      events: [],
+      eventClick: (arg) => this.handleTodoClick(arg)
     };
 
   async fetchTodos() {
@@ -65,6 +66,11 @@ export class CalendarComponent implements OnInit {
 
   handleDateClick(arg: any) {
     alert('date click! ' + arg.dateStr)
+  }
+
+  handleTodoClick(arg: any) {
+    console.log(arg.event.title)
+    console.log(arg.event.extendedProps)
   }
   
   toggleWeekends() {

@@ -13,6 +13,7 @@ import { TimerComponent } from './timer/timer.component';
 import { HeaderComponent } from './header/header.component';
 import { LucideAngularModule ,File, Home, Menu, UserCheck, Settings, LogIn, LogOut, CircleArrowLeft, Pause, Play } from 'lucide-angular';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { TodoPopoverComponent } from './todo-popover/todo-popover.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     CalendarComponent,
     TodoComponent,
     TimerComponent,
-    HeaderComponent
+    HeaderComponent,
+    TodoPopoverComponent
   ],
   imports: [
     BrowserModule,
