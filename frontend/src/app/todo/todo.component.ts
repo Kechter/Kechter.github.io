@@ -35,25 +35,23 @@ export class TodoComponent implements OnInit {
     }
   }
 
-  calculateDuration(): number {
-    return (this.newTodoHours * 3600) + (this.newTodoMinutes * 60) + this.newTodoSeconds;
+  calculateDuration(durationInSeconds: number): string {
+    const minutes = Math.floor(durationInSeconds / 60);
+    const seconds = durationInSeconds % 60;
+    return `${minutes} min ${seconds} sec`;
   }
 
   async addTodo() {
-    const duration = this.calculateDuration();
-    if (this.newTodoTitle.trim() && duration > 0 && this.newTodoDueDate) {
+    const durationInSeconds = this.newTodoMinutes * 60 + this.newTodoSeconds;
+    if (this.newTodoTitle.trim() && durationInSeconds > 0 && this.newTodoDueDate) {
       try {
         await this.supabaseService.addTodo({ 
           title: this.newTodoTitle, 
-          work_duration: duration, 
+          work_duration: durationInSeconds, 
           due_date: this.newTodoDueDate,
           is_complete: false 
         });
-        this.newTodoTitle = '';
-        this.newTodoHours = 0;
-        this.newTodoMinutes = 0;
-        this.newTodoSeconds = 0;
-        this.newTodoDueDate = '';
+        this.resetForm();
         this.fetchTodos();
         this.sharedService.notifyTodoUpdated();
       } catch (error) {
@@ -66,12 +64,12 @@ export class TodoComponent implements OnInit {
 
   async updateTodo() {
     if (this.editingTodo) {
-      const duration = this.calculateDuration();
-      if (this.newTodoTitle.trim() && duration > 0 && this.newTodoDueDate) {
+      const durationInSeconds = this.newTodoMinutes * 60 + this.newTodoSeconds;
+      if (this.newTodoTitle.trim() && durationInSeconds > 0 && this.newTodoDueDate) {
         try {
           await this.supabaseService.updateTodo(this.editingTodo.id!, {
             title: this.newTodoTitle,
-            work_duration: duration,
+            work_duration: durationInSeconds,
             due_date: this.newTodoDueDate
           });
           this.resetForm();
@@ -84,7 +82,7 @@ export class TodoComponent implements OnInit {
         alert('Please enter a valid todo title, duration, and due date.');
       }
     }
-  } 
+  }
 
   startEdit(todo: Todo) {
     this.editingTodo = { ...todo };
@@ -95,7 +93,6 @@ export class TodoComponent implements OnInit {
     this.newTodoMinutes = Math.floor((workDuration % 3600) / 60);
     this.newTodoSeconds = workDuration % 60;
   }
-  
 
   cancelEdit() {
     this.resetForm();
@@ -109,7 +106,6 @@ export class TodoComponent implements OnInit {
     this.newTodoSeconds = 0;
     this.newTodoDueDate = '';
   }
-
 
   async toggleComplete(todo: Todo) {
     try {

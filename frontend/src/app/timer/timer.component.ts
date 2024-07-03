@@ -8,12 +8,15 @@ import { SupabaseService } from '../supabase.service';
   styleUrls: ['./timer.component.css']
 })
 export class TimerComponent implements OnInit, OnDestroy {
-  timeLeft: number = 0;
+  timeLeft: number = 0; 
   duration: number = 0;
   public intervalId: any = null;
   private lastSavedTime: number = 0;
-  private saveInterval: number = 60;
+  private saveInterval: number = 60; 
   private todoId: string = '';
+
+  durationMinutes: number = 0;
+  durationSeconds: number = 0;
 
   constructor(private supabase: SupabaseService, private route: ActivatedRoute, private router: Router) {}
 
@@ -35,7 +38,7 @@ export class TimerComponent implements OnInit, OnDestroy {
         if (todo) {
           this.timeLeft = todo.work_duration ?? 0;
           this.duration = this.timeLeft;
-          this.startTimer()
+          this.startTimer();
         }
       } catch (error) {
         console.error('Error loading initial time:', error);
@@ -46,7 +49,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   startTimer(resume: boolean = false): void {
     if (!resume && this.duration <= 0) return;
     this.clearTimer();
-    if(!resume) this.timeLeft = this.duration;
+    if (!resume) this.timeLeft = this.duration;
     this.lastSavedTime = this.timeLeft;
     this.intervalId = setInterval(() => {
       this.timeLeft--;
@@ -65,7 +68,7 @@ export class TimerComponent implements OnInit, OnDestroy {
       clearInterval(this.intervalId);
       this.intervalId = null;
     }
-    if(save) {
+    if (save) {
       this.saveTime(true);
     }
   }
@@ -73,7 +76,9 @@ export class TimerComponent implements OnInit, OnDestroy {
   async saveTime(force: boolean = false): Promise<void> {
     if (force || Math.abs(this.lastSavedTime - this.timeLeft) >= this.saveInterval) {
       try {
-        await this.supabase.updateTodo(this.todoId, { work_duration: this.timeLeft });
+        await this.supabase.updateTodo(this.todoId, { 
+          work_duration: this.timeLeft
+        });
         this.lastSavedTime = this.timeLeft; 
       } catch (error) {
         console.error('Error saving time:', error);
@@ -89,9 +94,14 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   toggleTimer(): void {
     if (this.intervalId) {
-        this.clearTimer(true);
+      this.clearTimer(true);
     } else {
-        this.startTimer(true);
+      this.startTimer(true);
     }
-}
+  }
+
+  setDuration(): void {
+    this.duration = this.durationMinutes * 60 + this.durationSeconds;
+    this.timeLeft = this.duration;
+  }
 }

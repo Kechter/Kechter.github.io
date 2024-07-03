@@ -1,16 +1,20 @@
 <div class="timer-container">
-  <div class="time-display">
+    <div class="time-display">
       <h1>{{ formatTimeLeft() }}</h1>
-  </div>
-  <div class="timer-circle">
+    </div>
+    <div class="timer-circle">
       <button class="icon-button" [ngClass]="{'pause': intervalId}" (click)="toggleTimer()">
-          <span class="material-icons">
-              <lucide-icon [name]="intervalId ? 'pause' : 'play'"></lucide-icon>
-          </span>
+        <span class="material-icons">
+          <lucide-icon [name]="intervalId ? 'pause' : 'play'"></lucide-icon>
+        </span>
       </button>
+    </div>
+    <div class="duration-input">
+      <label for="minutes">Minutes:</label>
+      <input type="number" id="minutes" [(ngModel)]="durationMinutes" placeholder="Minutes" min="0" />
+      <label for="seconds">Seconds:</label>
+      <input type="number" id="seconds" [(ngModel)]="durationSeconds" placeholder="Seconds" min="0" max="59" />
+      <button (click)="setDuration()">Set</button>
+    </div>
   </div>
-  <div class="duration-input">
-      <label for="duration">Duration (seconds):</label>
-      <input type="number" id="duration" [(ngModel)]="duration" min="0">
-  </div>
-</div>
+  

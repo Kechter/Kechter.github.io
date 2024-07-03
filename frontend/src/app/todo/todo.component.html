@@ -5,6 +5,8 @@
     <div class="duration-inputs">
       <label for="minutes">Minutes:</label>
       <input type="number" id="minutes" [(ngModel)]="newTodoMinutes" placeholder="Minutes" min="0" max="59" />
+      <label for="seconds">Seconds:</label>
+      <input type="number" id="seconds" [(ngModel)]="newTodoSeconds" placeholder="Seconds" min="0" max="59" />
     </div>
     <input type="date" [(ngModel)]="newTodoDueDate" placeholder="Due Date" />
     <button *ngIf="!editingTodo" (click)="addTodo()">Add Todo</button>
@@ -21,7 +23,9 @@
         <button class="delete-todo" (click)="deleteTodo(todo.id!)">Delete</button>
       </div>
       <div class="todo-details">
-        <span>Duration: {{ todo.work_duration || 0 }}s</span>
+        <span *ngIf="todo.work_duration !== undefined">
+          Duration: {{ calculateDuration(todo.work_duration) }}
+        </span>
         <span *ngIf="todo.due_date">Due: {{ todo.due_date | date:'shortDate' }}</span>
       </div>
     </div>
