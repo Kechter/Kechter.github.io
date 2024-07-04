@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-todo-popover',
@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./todo-popover.component.css']
 })
 export class TodoPopoverComponent {
+  @Input() selectedTodoId: string | null = null;
+  isModalVisible: boolean = false;
 
+  openModal(todoId: string) {
+    this.selectedTodoId = todoId;
+    this.isModalVisible = true;
+  }
+
+  closeModal() {
+    this.isModalVisible = false;
+  }
 }
+

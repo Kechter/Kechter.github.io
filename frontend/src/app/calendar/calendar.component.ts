@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HeaderService } from '../header.service';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import { SupabaseService, Todo } from '../supabase.service';
 import { SharedService } from '../shared.service';
+import { TodoPopoverComponent } from '../todo-popover/todo-popover.component';
 
 @Component({
   selector: 'app-calendar',
@@ -13,7 +14,10 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+  @ViewChild(TodoPopoverComponent) todoPopover!: TodoPopoverComponent;
+
   todos: Todo[] = [];
+  selectedTodoId: string = '';
 
   constructor(private headerService: HeaderService, private supabaseService: SupabaseService, private sharedService: SharedService) {}
 
@@ -28,23 +32,23 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-    calendarOptions: CalendarOptions = {
-      initialView: 'timeGridWeek',
-      weekends: false,
-      height: "90vh",
-      plugins: [timeGridPlugin, interactionPlugin, dayGridPlugin],
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'timeGridDay,timeGridWeek,dayGridMonth'
-      },
-      dateClick: (arg) => this.handleDateClick(arg),
-      events: [],
-      eventClick: (arg) => this.handleTodoClick(arg)
-    };
+  calendarOptions: CalendarOptions = {
+    initialView: 'timeGridWeek',
+    weekends: false,
+    height: "90vh",
+    plugins: [timeGridPlugin, interactionPlugin, dayGridPlugin],
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'timeGridDay,timeGridWeek,dayGridMonth'
+    },
+    dateClick: (arg) => this.handleDateClick(arg),
+    events: [],
+    eventClick: (arg) => this.handleTodoClick(arg)
+  };
 
   async fetchTodos() {
-    try{
+    try {
       this.todos = await this.supabaseService.getTodos();
       this.updateCalendarEvents(); 
     }
@@ -67,17 +71,21 @@ export class CalendarComponent implements OnInit {
   }
 
   handleDateClick(arg: any) {
-    alert('date click! ' + arg.dateStr)
+    alert('Date click! ' + arg.dateStr);
   }
 
   handleTodoClick(arg: any) {
-    console.log(arg.event.title)
-    console.log(arg.event.extendedProps)
+    const todoId = arg.event.extendedProps.id;
+    if (todoId) {
+      this.selectedTodoId = todoId;
+      this.todoPopover.openModal(this.selectedTodoId);
+    }
   }
-  
+
   toggleWeekends() {
     this.calendarOptions = {
       ...this.calendarOptions,
-      weekends: !this.calendarOptions.weekends  }
+      weekends: !this.calendarOptions.weekends
+    };
   }
 }

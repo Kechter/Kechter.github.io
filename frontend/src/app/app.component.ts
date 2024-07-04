@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { SupabaseService } from './supabase.service'
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
