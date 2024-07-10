@@ -1,8 +1,8 @@
-<div class="row flex-center flex">
-    <div class="col-6 form-widget" aria-live="polite">
-      <h1 class="header">Register</h1>
+<div class="justify-center row flex-center flex rounded-md p-4 mx-auto my-auto w-64 border-2">
+    <div class="w-full">
+      <h1 class="header text-2xl">Register</h1>
       <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="form-widget">
-        <div>
+        <div class="flex-col flex">
           <label for="email">Email</label>
           <input
             id="email"
@@ -11,6 +11,7 @@
             type="email"
             placeholder="Your email"
           />
+          <label for="password">Passwort</label>
           <input
             id="password"
             formControlName="password"
@@ -19,10 +20,10 @@
             placeholder="Your password"
           />
         </div>
-        <div>
-          <button type="submit" class="button block" [disabled]="loading">
+        <div class="mt-4">
+          <app-button type="submit">
             {{ loading ? 'Loading' : 'Register' }}
-          </button>
+          </app-button>
         </div>
       </form>
       <div class="switch">

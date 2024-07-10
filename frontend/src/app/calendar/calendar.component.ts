@@ -7,6 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { SupabaseService, Todo } from '../supabase.service';
 import { SharedService } from '../shared.service';
 import { TodoPopoverComponent } from '../todo-popover/todo-popover.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
@@ -18,18 +19,29 @@ export class CalendarComponent implements OnInit {
 
   todos: Todo[] = [];
   selectedTodoId: string = '';
+  private subscription: Subscription;
 
-  constructor(private headerService: HeaderService, private supabaseService: SupabaseService, private sharedService: SharedService) {}
+  constructor(
+    private headerService: HeaderService,
+    private supabaseService: SupabaseService,
+    private sharedService: SharedService
+  ) {
+    this.subscription = this.sharedService.todoUpdated$.subscribe(() => {
+      this.fetchTodos();
+    });
+  }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.headerService.changeTitle('Calendar');
-    await this.fetchTodos();
-    this.updateCalendarEvents();
-  
+    this.fetchTodos();
+
     this.sharedService.todoUpdated$.subscribe(() => {
       this.fetchTodos();
-      this.updateCalendarEvents();
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   calendarOptions: CalendarOptions = {
@@ -44,7 +56,8 @@ export class CalendarComponent implements OnInit {
     },
     dateClick: (arg) => this.handleDateClick(arg),
     events: [],
-    eventClick: (arg) => this.handleTodoClick(arg)
+    eventClick: (arg) => this.handleTodoClick(arg),
+    eventColor: 'blue',
   };
 
   async fetchTodos() {
@@ -61,24 +74,29 @@ export class CalendarComponent implements OnInit {
     this.calendarOptions.events = this.todos.map(todo => ({
       title: todo.title,
       date: todo.due_date,
+      allDay: true,
       extendedProps: {
         work_duration: todo.work_duration,
-        is_complete: todo.is_complete,
-        id: todo.id,
-        due_date: todo.due_date
+        id: todo.id
       }
     }));
   }
 
-  handleDateClick(arg: any) {
-    alert('Date click! ' + arg.dateStr);
-  }
-
   handleTodoClick(arg: any) {
     const todoId = arg.event.extendedProps.id;
-    if (todoId) {
-      this.selectedTodoId = todoId;
-      this.todoPopover.openModal(this.selectedTodoId);
+    const selectedTodo = this.todos.find(todo => todo.id === todoId);
+
+    if (selectedTodo) {
+      this.todoPopover.openModal(selectedTodo);
+    }
+  }
+
+  handleDateClick(arg: any) {
+    const dateStr = arg.dateStr;
+    const selectedTodo = this.todos.find(todo => todo.due_date === dateStr);
+
+    if (selectedTodo) {
+      this.selectedTodoId = selectedTodo.id || '';
     }
   }
 

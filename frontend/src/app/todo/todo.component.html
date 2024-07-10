@@ -1,33 +1,34 @@
-<div class="pt-20 m-4">
-  <h1>Todo List</h1>
-  <div class="todo-inputs">
-    <input [(ngModel)]="newTodoTitle" placeholder="Enter todo title" />
-    <div class="duration-inputs">
-      <label for="minutes">Minutes:</label>
-      <input type="number" id="minutes" [(ngModel)]="newTodoMinutes" placeholder="Minutes" min="0" max="59" />
-      <label for="seconds">Seconds:</label>
-      <input type="number" id="seconds" [(ngModel)]="newTodoSeconds" placeholder="Seconds" min="0" max="59" />
+<div class="h-screen flex flex-col p-4">
+  <h1 class="text-xl font-bold mb-4">Todo List</h1>
+  <div class="bg-white shadow-lg z-10 flex items-center gap-2 mb-4 p-4">
+    <input placeholder="Enter todo title" class="p-2 border border-gray-300 rounded-md" [(ngModel)]="newTodoTitle" />
+    <div class="flex items-center gap-2">
+      <label for="minutes" class="mr-1">Minutes:</label>
+      <input type="number" id="minutes" placeholder="Minutes" min="0" max="59" class="w-16 p-1 border border-gray-300 rounded-md" [(ngModel)]="newTodoMinutes" />
+      <label for="seconds" class="mr-1">Seconds:</label>
+      <input type="number" id="seconds" placeholder="Seconds" min="0" max="59" class="w-16 p-1 border border-gray-300 rounded-md" [(ngModel)]="newTodoSeconds" />
     </div>
-    <input type="date" [(ngModel)]="newTodoDueDate" placeholder="Due Date" />
-    <button *ngIf="!editingTodo" (click)="addTodo()">Add Todo</button>
-    <button *ngIf="editingTodo" (click)="updateTodo()">Save</button>
-    <button *ngIf="editingTodo" (click)="cancelEdit()">Cancel</button>
+    <input type="date" placeholder="Due Date" class="p-2 border border-gray-300 rounded-md" [(ngModel)]="newTodoDueDate" />
+    <button class="p-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" (click)="addTodo()">Add Todo</button>
   </div>
-  <div class="todo-list">
-    <div class="todo-item" *ngFor="let todo of todos">
-      <div class="todo-header">
-        <input type="checkbox" [checked]="todo.is_complete" (change)="toggleComplete(todo)" />
-        <div class="todo-title">{{ todo.title }}</div>
-        <button class="edit-todo" (click)="startEdit(todo)">Edit</button>
-        <button class="start-timer" (click)="startTimer(todo)">Start Timer</button>
-        <button class="delete-todo" (click)="deleteTodo(todo.id!)">Delete</button>
-      </div>
-      <div class="todo-details">
-        <span *ngIf="todo.work_duration !== undefined">
-          Duration: {{ calculateDuration(todo.work_duration) }}
-        </span>
-        <span *ngIf="todo.due_date">Due: {{ todo.due_date | date:'shortDate' }}</span>
+  <div class="mt-4 overflow-auto flex-1">
+    <div class="flex flex-col gap-4">
+      <div class="p-4 border border-gray-300 rounded-lg shadow-sm bg-white" *ngFor="let todo of todos">
+        <div class="flex items-center gap-2">
+          <input type="checkbox" [checked]="todo.is_complete" (change)="toggleComplete(todo)" class="mr-2" />
+          <div class="flex-1">{{ todo.title }}</div>
+          <button class="text-blue-500 hover:underline" (click)="editTodoInModal(todo)">Edit</button>
+          <button class="text-blue-500 hover:underline" (click)="startTimer(todo)">Start Timer</button>
+          <button class="text-blue-500 hover:underline" (click)="deleteTodo(todo.id!)">Delete</button>
+        </div>
+        <div class="flex justify-between mt-2">
+          <span *ngIf="todo.work_duration !== undefined" class="text-sm text-gray-600">
+            Duration: {{ calculateDuration(todo.work_duration) }}
+          </span>
+          <span *ngIf="todo.due_date" class="text-sm text-gray-600">Due: {{ todo.due_date | date:'shortDate' }}</span>
+        </div>
       </div>
     </div>
   </div>
+  <app-todo-popover></app-todo-popover>
 </div>

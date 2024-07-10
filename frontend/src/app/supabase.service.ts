@@ -4,12 +4,10 @@ import {
   AuthChangeEvent,
   AuthSession,
   createClient,
-  Session,
   SupabaseClient,
   User,
 } from '@supabase/supabase-js'
-import { environment } from 'environment'
-import { Timestamp } from 'rxjs';
+import { environment } from '../../environment'
 
 export interface Todo {
   id?: string;
@@ -72,8 +70,10 @@ export class SupabaseService {
   }
 
   async getTodos() {
-    const user = await this.user;
-    console.log(user);
+    const user = await this.loadUser();
+    if (!user || !user.id) {
+      throw new Error('User is not logged in or User Id is missing');
+    }
     const { data, error } = await this.supabase
       .from('todos')
       .select('*')

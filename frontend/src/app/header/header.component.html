@@ -1,18 +1,20 @@
-<div class="header">
+<div class="header bg-gray-200">
   <div class="header-left">
-    <button class="icon-button" (click)="goBack()">
+    <app-button class="icon-button" (click)="goBack()">
       <span class="material-icons"><lucide-icon name="circle-arrow-left"></lucide-icon></span>
-    </button>
-    <button class="icon-button bg-blue-500" (click)="goHome()">
+    </app-button>
+    <app-button class="icon-button bg-blue-500" (click)="goHome()">
       <span class="material-icons"><lucide-icon name="home"></lucide-icon></span>
-    </button>
+    </app-button>
   </div>
   <div class="header-center">
     <h1>{{ title }}</h1>
   </div>
   <div class="header-right">
       <span class="user" *ngIf="user">Logged in as: {{ user.email }}</span>
-      <button class="icon-button" (click)="signOut()"><lucide-icon name="log-out"></lucide-icon></button>
+      <app-button class="icon-button" (click)="signOut()">
+        <span class="material-icons"><lucide-icon name="log-out"></lucide-icon></span>
+      </app-button>
       <!-- <button class="icon-button">
       <span class="material-icons"><lucide-icon name="settings"></lucide-icon></span>
       </button> -->

@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { LucideAngularModule ,File, Home, Menu, UserCheck, Settings, LogIn, LogOut, CircleArrowLeft, Pause, Play } from 'lucide-angular';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { TodoPopoverComponent } from './todo-popover/todo-popover.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TodoPopoverComponent } from './todo-popover/todo-popover.component';
     TodoComponent,
     TimerComponent,
     HeaderComponent,
-    TodoPopoverComponent
+    TodoPopoverComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

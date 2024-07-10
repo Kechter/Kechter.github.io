@@ -3,7 +3,7 @@
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
       <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-          Todo Details (ID: {{ selectedTodoId }})
+          Edit "{{ selectedTodo?.title }}" Todo
         </h3>
         <button type="button" (click)="closeModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
           <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -12,8 +12,25 @@
           <span class="sr-only">Close modal</span>
         </button>
       </div>
-      <form class="p-4 md:p-5">
-        <!-- Form contents as before -->
+      <form (ngSubmit)="saveTodo()" class="p-4 md:p-5">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
+          <input *ngIf="selectedTodo" [(ngModel)]="selectedTodo.title" name="title" class="p-2 mt-1 block w-full border border-gray-300 rounded-md" required />
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Due Date</label>
+          <input *ngIf="selectedTodo" type="date" [(ngModel)]="selectedTodo.due_date" name="due_date" class="p-2 mt-1 block w-full border border-gray-300 rounded-md" required />
+        </div>
+        <div class="mb-4 flex items-center gap-2">
+          <label for="minutes" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Minutes:</label>
+          <input type="number" [(ngModel)]="todoMinutes" name="minutes" id="minutes" placeholder="Minutes" min="0" max="59" class="w-16 p-2 border border-gray-300 rounded-md" required />
+          <label for="seconds" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Seconds:</label>
+          <input type="number" [(ngModel)]="todoSeconds" name="seconds" id="seconds" placeholder="Seconds" min="0" max="59" class="w-16 p-2 border border-gray-300 rounded-md" required />
+        </div>
+        <div class="flex items-center justify-end">
+          <button type="button" (click)="closeModal()" class="p-2 px-4 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button>
+          <button type="submit" class="ml-2 p-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">Save</button>
+        </div>
       </form>
     </div>
   </div>
