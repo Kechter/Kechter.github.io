@@ -45,6 +45,7 @@ export class CalendarComponent implements OnInit {
   }
 
   calendarOptions: CalendarOptions = {
+    handleWindowResize: true,
     initialView: 'timeGridWeek',
     weekends: false,
     height: "90vh",
