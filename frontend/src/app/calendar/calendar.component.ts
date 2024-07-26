@@ -38,6 +38,7 @@ export class CalendarComponent implements OnInit {
     this.sharedService.todoUpdated$.subscribe(() => {
       this.fetchTodos();
     });
+    console.log(this.todos)
   }
 
   ngOnDestroy() {

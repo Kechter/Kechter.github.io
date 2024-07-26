@@ -21,9 +21,9 @@
         <div class="flex items-center gap-2">
           <input type="checkbox" [checked]="todo.is_complete" (change)="toggleComplete(todo)" class="mr-2" />
           <div class="flex-1">{{ todo.title }}</div>
-          <button class="text-blue-500 hover:underline" (click)="editTodoInModal(todo)">Edit</button>
-          <button class="text-blue-500 hover:underline" (click)="startTimer(todo)">Start Timer</button>
-          <button class="text-blue-500 hover:underline" (click)="deleteTodo(todo.id!)">Delete</button>
+          <app-button class="text-blue-500 hover:underline" (click)="editTodoInModal(todo)">Edit</app-button>
+          <app-button class="text-blue-500 hover:underline" (click)="startTimer(todo)">Start Timer</app-button>
+          <app-button class="text-blue-500 hover:underline" (click)="deleteTodo(todo.id!)">Delete</app-button>
         </div>
         <div class="flex justify-between mt-2">
           <span *ngIf="todo.work_duration !== undefined" class="text-sm text-gray-600">

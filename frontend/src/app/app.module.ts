@@ -11,7 +11,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { TodoComponent } from './todo/todo.component';
 import { TimerComponent } from './timer/timer.component';
 import { HeaderComponent } from './header/header.component';
-import { LucideAngularModule ,File, Home, Menu, UserCheck, Settings, LogIn, LogOut, CircleArrowLeft, Pause, Play } from 'lucide-angular';
+import { LucideAngularModule ,File, Home, Menu, UserCheck, Settings, LogIn, LogOut, CircleArrowLeft, Pause, Play, Edit } from 'lucide-angular';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { TodoPopoverComponent } from './todo-popover/todo-popover.component';
 import { ButtonComponent } from './button/button.component';
@@ -35,7 +35,7 @@ import { ButtonComponent } from './button/button.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    LucideAngularModule.pick({File,Home,Menu,UserCheck, Settings, LogIn, LogOut, CircleArrowLeft,Play, Pause}),
+    LucideAngularModule.pick({File,Home,Menu,UserCheck, Settings, LogIn, LogOut, CircleArrowLeft,Play, Pause, Edit}),
     FullCalendarModule
   ],
   providers: [],
