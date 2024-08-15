@@ -1,4 +1,4 @@
-<ng-container *ngIf="session; else auth">
+<ng-container *ngIf="session && !isAuthRoute(); else auth">
   <app-header class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 p-4"></app-header>
   <div class="relative top-128">
     <div class="pt-20 m-4">

@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { SupabaseService } from './supabase.service'
-import { initFlowbite } from 'flowbite';
+import { Component, OnInit } from '@angular/core';
+import { SupabaseService } from './supabase.service';
+import { AuthSession } from '@supabase/supabase-js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,19 @@ import { initFlowbite } from 'flowbite';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'angular-user-management'
+  title = 'angular-user-management';
 
-  session = this.supabase._session
+  session: AuthSession | null = null;
 
-  constructor(private readonly supabase: SupabaseService) {}
+  constructor(private readonly supabase: SupabaseService, private readonly router: Router) {}
 
   ngOnInit() {
-    this.supabase.authChanges((_, session) => (this.session = session))
+    this.supabase.authState$.subscribe((session: AuthSession | null) => {
+      this.session = session;
+    });
+  }
+
+  isAuthRoute(): boolean {
+    return this.router.url.includes('register') || this.router.url.includes('login');
   }
 }

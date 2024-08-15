@@ -1,13 +1,14 @@
+import { Injectable } from '@angular/core';
 import { Time } from '@angular/common';
-import { Injectable } from '@angular/core'
 import {
   AuthChangeEvent,
   AuthSession,
   createClient,
   SupabaseClient,
   User,
-} from '@supabase/supabase-js'
-import { environment } from '../../environment'
+} from '@supabase/supabase-js';
+import { environment } from '../../environment';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface Todo {
   id?: string;
@@ -23,13 +24,18 @@ export interface Todo {
   providedIn: 'root',
 })
 export class SupabaseService {
-  private supabase: SupabaseClient
-  _session: AuthSession | null = null
-  private _user: User | null = null
+  private supabase: SupabaseClient;
+  private _session: AuthSession | null = null;
+  private _user: User | null = null;
+  private authStateSubject: BehaviorSubject<AuthSession | null> = new BehaviorSubject<AuthSession | null>(null);
+  public authState$: Observable<AuthSession | null> = this.authStateSubject.asObservable();
 
   constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
     this.loadUser();
+    this.authChanges((event, session) => {
+      this.authStateSubject.next(session);
+    });
   }
 
   async getSession(): Promise<AuthSession | null> {
@@ -48,25 +54,25 @@ export class SupabaseService {
     return this._user;
   }
 
-
   authChanges(callback: (event: AuthChangeEvent, session: AuthSession | null) => void) {
     return this.supabase.auth.onAuthStateChange((event, session) => {
       this._session = session;
-      this._user = session?.user || null;   
+      this._user = session?.user || null;
+      this.authStateSubject.next(session);
       callback(event, session);
     });
   }
 
   signUp(email: string, password: string) {
-    return this.supabase.auth.signUp({ email, password })
+    return this.supabase.auth.signUp({ email, password });
   }
 
   signIn(email: string, password: string) {
-    return this.supabase.auth.signInWithPassword({ email, password })
+    return this.supabase.auth.signInWithPassword({ email, password });
   }
 
   signOut() {
-    return this.supabase.auth.signOut()
+    return this.supabase.auth.signOut();
   }
 
   async getTodos() {
@@ -88,7 +94,7 @@ export class SupabaseService {
     const { data, error } = await this.supabase
       .from('todos')
       .insert([{ ...todo, user_id: this._session?.user?.id }]);
-  
+
     if (error) throw error;
     return data;
   }
@@ -115,7 +121,7 @@ export class SupabaseService {
 
   async saveTimerData(userId: string, time: number): Promise<void> {
     const { error } = await this.supabase
-      .from('timers') 
+      .from('timers')
       .upsert({ user_id: userId, time }, { onConflict: 'user_id' });
     if (error) throw error;
   }
@@ -127,7 +133,7 @@ export class SupabaseService {
       .eq('user_id', userId)
       .single();
     if (error) {
-      return null;  
+      return null;
     }
     return data ? data.time : null;
   }
